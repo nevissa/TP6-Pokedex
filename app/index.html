@@ -1,0 +1,142 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+</head>
+
+<body ng-app="tpAngularApp">
+
+<p></p>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">POKEDEX </div>
+    <div class="panel-body">
+      <div class="row">
+
+
+
+        <section class="col-lg-6">
+          <!-- Search and print pokemon name in the console -->
+          <div  ng-controller= "pokemonSearch">
+            <label class="control-label">Recherche d'un Pokemon Via son numero</label></br>
+            <input type="text" ng-model="id"/>
+            <p></p>
+            <ul class="list-group">
+              <li class="list-group-item">Id: {{id}} </li>
+            </ul>
+          </div>
+        </section>
+        <section class="col-lg-6">
+    <!-- Search and print pokemon name in the console -->
+  <div  ng-controller= "pokemonSearch">
+    <label class="control-label">Recherche dans une liste</label></br>
+    <input type="text" ng-model="query"/>
+    <select ng-options="pokemon as pokemon.name for pokemon in pokemons|filter:{name:query}" ng-model="selection"> </select>
+    <button class="btn btn-primary" ng-click="logInfo()">Go !</button>
+    <p></p>
+    <ul class="list-group">
+    <li class="list-group-item">Id: {{selection.id}} </li>
+    <li class="list-group-item">name: {{selection.name}} </li>
+   </ul>
+  </div>
+        </section>
+        </div>
+        <div class="row">
+        <section class="col-lg-6">
+
+  <!-- get Pokemon information to an external API with service $ressource ---->
+          <div ng-controller= "PokemonByRessource">
+            <label class="control-label">Acces à une API distante</label> <input type="text" ng-model="quey">
+            <select ng-options="pokemon as pokemon.name for pokemon in pokApi |filter:{name:quey}"
+                    ng-model="select"> </select>
+            <p></p>
+            <ul class="list-group">
+            <li class="list-group-item">Id: {{pok.data.id}} </li>
+            <li class="list-group-item">name: {{pok.data.name}} </li>
+            <li class="list-group-item">Height: {{pok.data.height}} </li>
+            <li class="list-group-item">Weight: {{pok.data.weight}} </li>
+              <li class="list-group-item">Attaques : {{pok.data.moves.length}} </li>
+
+              <li class="list-group-item">Image: <img src ="{{pok.data.sprites.back_default}}" /></li>
+
+            </ul>
+          </div>
+        </section>
+
+
+
+
+        <section class="col-lg-6">
+
+          <div ng-controller="PokemonSet">
+            <label class="control-label">Communication entre controlleurs</label> <input type="text" ng-model="quey">
+            <select ng-options="pokemon as pokemon.name for pokemon in poks |filter:{name:quey}"
+                    ng-model="selected"> </select>
+          </div>
+          <p></p>
+          <div ng-controller="PokemonGet">
+            <ul class="list-group">
+              <li class="list-group-item">Id: {{InfoPok.data.id}} </li>
+              <li class="list-group-item">name: {{InfoPok.data.name}} </li>
+              <li class="list-group-item">Height: {{InfoPok.data.height}} </li>
+              <li class="list-group-item">Weight: {{InfoPok.data.weight}} </li>
+
+              <li class="list-group-item">Attaques : {{InfoPok.data.moves.length}} </li>
+
+              <li class="list-group-item">Image: <img src ="{{InfoPok.data.sprites.back_default}}"/></li>
+
+            </ul>
+          </div>
+        </section>
+
+
+
+
+
+
+
+
+      </div></div>
+  </div>
+
+</body>
+
+
+<script>
+  !function (A, n, g, u, l, a, r) {
+    A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+      (A[l].q = A[l].q || []).push(arguments)
+    }, A[l].l = +new Date, a = n.createElement(g),
+      r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+  }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');
+</script>
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/about.js"></script>
+<!-- endbuild -->
+
+</html>
